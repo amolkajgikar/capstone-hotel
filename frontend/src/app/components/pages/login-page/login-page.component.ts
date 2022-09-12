@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscriber } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
@@ -12,10 +12,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  loginForm!:FormGroup;
+  loginForm!:UntypedFormGroup;
   isSubmitted =false;
   returnUrl='';
-  constructor(private formBuilder:FormBuilder, 
+  constructor(private formBuilder:UntypedFormBuilder, 
     private userService:UserService, private activatedRoute:ActivatedRoute,
     private router:Router) { }
 
