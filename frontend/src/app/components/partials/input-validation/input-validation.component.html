@@ -1,0 +1,6 @@
+<!-- <p>input-validation works!</p> -->
+<div class="error-list" *ngIf="errorMessages && showErrorsWhen">
+    <div *ngFor="let errorMessage of errorMessages">
+        {{errorMessage}}
+    </div>
+</div>
