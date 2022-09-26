@@ -1,0 +1,3 @@
+mongodb+srv://amolkajgikar:<password>@cluster0.m0ql8.mongodb.net/?retryWrites=true&w=majority
+
+mongodb+srv://amolkajgikar:amol123@cluster0.m0ql8.mongodb.net/SLBookStore?retryWrites=true&w=majority
