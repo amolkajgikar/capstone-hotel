@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import { sample_users } from '../data';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import { User, UserModel } from '../models/user.model';
 import { HTTP_BAD_REQUEST } from '../constants/http_status';
 import bcrypt from 'bcryptjs';
+import { sample_users } from '../data';
 const router = Router();
 
 router.get("/seed", asyncHandler(
@@ -64,7 +64,8 @@ router.post('/register', asyncHandler(
   const generateTokenReponce = (user : User) => {
     const token = jwt.sign({
       id: user.id, email:user.email, isAdmin: user.isAdmin
-    },process.env.JWT_SECRET!,{
+    },`${process.env.JWT_SECRET_KEY}`,{
+    // },process.env.JWT_SECRET!,{
       expiresIn:"30d"
     });
   
