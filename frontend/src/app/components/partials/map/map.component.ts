@@ -1,5 +1,5 @@
 import { Order } from 'src/app/shared/models/Order';
-import { LocationService } from './../../../services/location.service';
+import { LocationService } from 'src/app/services/location.service';
 import { Component, ElementRef, Input, ViewChild, OnChanges } from '@angular/core';
 import { icon, LatLng, LatLngExpression, LatLngTuple,LeafletMouseEvent, map, Map, marker, Marker, tileLayer } from 'leaflet';
 
@@ -9,13 +9,10 @@ import { icon, LatLng, LatLngExpression, LatLngTuple,LeafletMouseEvent, map, Map
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnChanges {
-  
   @Input()
   order!:Order;
   @Input()
   readonly=false;
-
-
   private readonly MARKER_ZOOM_LEVEL = 16;
   private readonly MARKER_ICON = icon({
     iconUrl:
@@ -24,13 +21,13 @@ export class MapComponent implements OnChanges {
     iconAnchor: [21, 42],
   });
   private readonly DEAFULT_LATLNG: LatLngTuple = [13.75,21.62]
+ 
   @ViewChild('map',{static:true})
   mapRef!:ElementRef;
   map!:Map;
   currentMarker!:Marker;
   
-
-  constructor(private locationService: LocationService) { }
+ constructor(private locationService: LocationService) { }
 
   ngOnChanges(): void {
     if(!this.order) return;
@@ -54,8 +51,6 @@ export class MapComponent implements OnChanges {
     m.off('click');
     m.tap?.disable();
     this.currentMarker.dragging?.disable();
-
-
   }
 
   initializeMap(){
@@ -63,12 +58,11 @@ export class MapComponent implements OnChanges {
 
     this.map=map(this.mapRef.nativeElement,{
       attributionControl:false
-    }).setView(this.DEAFULT_LATLNG,0.5 )
+    }).setView(this.DEAFULT_LATLNG,0.5)
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
 
     this.map.on('click',(e:LeafletMouseEvent)=>{
       this.setMarker(e.latlng);
-
     })
 
   }
@@ -98,18 +92,18 @@ export class MapComponent implements OnChanges {
         this.addressLatLng = this.currentMarker.getLatLng();
       })
 
-  }
+ 
+    }
   
   set addressLatLng(latlng:LatLng){
-
     if(!latlng.lat.toFixed) return;
-
 
     latlng.lat = parseFloat(latlng.lat.toFixed(8));
     latlng.lng = parseFloat(latlng.lng.toFixed(8));
     this.order.addressLatLng = latlng;
     console.log(this.order.addressLatLng);
   }
+ 
   get addressLatLng(){
     return this.order.addressLatLng!;
   }

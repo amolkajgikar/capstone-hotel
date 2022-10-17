@@ -1,3 +1,4 @@
+import { Cart } from './../../../shared/models/Cart';
 import { Router } from '@angular/router';
 import { OrderService } from './../../../services/order.service';
 import { ToastrService } from 'ngx-toastr';
@@ -53,6 +54,7 @@ createOrder(){
   
   this.orderService.create(this.order).subscribe({
     next:() => {
+      
       this.router.navigateByUrl('/payment');
     },
     error:(errorResponse) => {
