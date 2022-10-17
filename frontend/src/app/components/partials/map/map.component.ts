@@ -9,6 +9,7 @@ import { icon, LatLng, LatLngExpression, LatLngTuple,LeafletMouseEvent, map, Map
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnChanges {
+  
   @Input()
   order!:Order;
   @Input()
@@ -62,7 +63,7 @@ export class MapComponent implements OnChanges {
 
     this.map=map(this.mapRef.nativeElement,{
       attributionControl:false
-    }).setView(this.DEAFULT_LATLNG,1 )
+    }).setView(this.DEAFULT_LATLNG,0.5 )
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
 
     this.map.on('click',(e:LeafletMouseEvent)=>{
@@ -71,10 +72,11 @@ export class MapComponent implements OnChanges {
     })
 
   }
+  
   findMyLocation(){
     this.locationService.getCurrentLocation().subscribe({
       next: (latlng)=>{
-        // console.log(latlng);
+        console.log(latlng);
         this.map.setView(latlng, this.MARKER_ZOOM_LEVEL)
         this.setMarker(latlng)
       }

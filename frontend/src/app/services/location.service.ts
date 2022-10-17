@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LatLngLiteral } from 'leaflet';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +8,38 @@ import { LatLngLiteral } from 'leaflet';
 export class LocationService {
 
   constructor() { }
-  getCurrentLocation():Observable<LatLngLiteral>{
-    return new Observable((observer)=>{
+
+  getCurrentLocation(): Observable<LatLngLiteral>{
+    return new Observable((observer) => {
       if(!navigator.geolocation) return;
+
       return navigator.geolocation.getCurrentPosition(
-        (pos)=>{
-         observer.next({
-            lat:pos.coords.latitude,
+        (pos) => {
+          observer.next({
+            lat: pos.coords.latitude,
             lng: pos.coords.longitude
           })
         },
-        (error)=>{
+        (error) => {
           observer.error(error);
         }
       )
     })
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
