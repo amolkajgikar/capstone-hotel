@@ -1,0 +1,13 @@
+version: '3.0' # specify docker-compose version
+ 
+# Define the services/ containers to be run
+services:
+ frontend: # name of the first service
+  build: frontend # specify the directory of the Dockerfile
+  ports:
+  - "4200:4200" # specify port mapping
+ 
+ backend: # name of the second service
+  build: backend # specify the directory of the Dockerfile
+  ports:
+  - "5000:5000" #specify ports mapping
